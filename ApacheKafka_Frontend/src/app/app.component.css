@@ -1,0 +1,26 @@
+.container{
+    display: flex;
+    width: 100%;
+    height: 100%;
+}
+
+.leftcontainer{
+    width: 30%;
+    background-color: rgb(176, 227, 255);
+}
+
+.rightcontainer{
+    width: 100%;
+    background-color: rgba(255, 196, 185, 0.952);
+}
+
+.topicList{
+    display: inline-block;
+    visibility: visible;
+    background-color: rgba(244, 245, 187, 0.952);
+}
+
+.topicListHidden{
+    display: none;
+    visibility: hidden;
+}

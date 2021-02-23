@@ -1,0 +1,65 @@
+<div style=" background-color: rgb(206, 255, 238); padding-bottom: 15px; padding-top: 15px;">
+    <h1 style="text-align: center; font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;">Log Reader</h1>
+</div>
+
+<div id="main-content" class="container">
+
+    <div class="leftcontainer">
+        <div class="row">
+            <div class="col-md-12">
+            </div>
+        </div>
+
+        <div class="row" style="padding-top: 10px;">
+            <div class="col-md-6" style="padding-left: 50px;">
+                <form class="form-inline">
+
+                    <button (click)="consumeTopic($event)" style="background-color: rgba(255, 196, 185, 0.952);"  name="TopicProve" class="btn btn-default"
+                        type="submit">TopicProve</button>
+
+                    <button (click)="consumeTopic($event)" name="TopicProve2" style="margin-left: 40px;background-color: rgba(255, 196, 185, 0.952);" class="btn btn-default"
+                        type="submit">TopicProve2</button>
+                </form>
+            </div>
+            <hr>
+            <div class="col-md-6" style="padding-left: 30px;">
+                <form class="form-inline">
+
+                    Search by the content<input type="text" [(ngModel)]="content" name="ContentSearch" />
+
+                </form>
+            </div>
+
+            <hr>
+            <div class="col-md-6" style="padding-left: 30px;">
+                <form class="form-inline">
+
+                    Search by the source<input type="text" [(ngModel)]="source" name="SourceSearch" />
+
+                </form>
+            </div>
+
+            <hr>
+            <div class="col-md-6" style="padding-left: 120px;">
+
+                    <button (click)="searchFilter()" name="source" style="background-color: rgba(255, 196, 185, 0.952);" class="btn btn-default" type="submit">Search</button>
+
+            </div>
+        </div>
+    </div>
+
+
+    <div class="rightcontainer">
+        <ul class="{{topicListDisplay ? 'topicList' : 'topicListHidden'}}">
+            <li *ngFor="let listIndex of list">
+                {{listIndex}}
+            </li>
+        </ul>
+        <ul class="finalList">
+            <li *ngFor="let list of finalList">
+                {{list.content}}
+                {{list.path}}
+            </li>
+        </ul>
+    </div>
+</div>
