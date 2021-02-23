@@ -28,6 +28,7 @@ public class ProducerController {
 
     @Autowired
     KafkaTemplate<String, List<MessageModel>> kafkaTemplate;
+
     public static long actualOffset =0;
     public String lastObj = "";
     public String lastObj2 = "";
@@ -39,7 +40,8 @@ public class ProducerController {
     @KafkaListener(groupId = "group_id",topicPartitions = {
             @TopicPartition(topic = TOPIC1,
                     partitionOffsets = @PartitionOffset(partition = "0", initialOffset = "0"))
-            })
+            }
+    )
 
     public void consumeObject(ConsumerRecord<String, String> consumerRecord) throws JsonProcessingException {
         this.actualOffset = consumerRecord.offset(); // get the last offset
@@ -71,8 +73,8 @@ public class ProducerController {
     }
 
 
-    public String producerToTopic1() throws FileNotFoundException, JsonProcessingException {
-        Logger info = Logger.getLogger("info"); // writes info logs to file1.log
+    public String producerToTopic1() throws FileNotFoundException, JsonProcessingException { // what producer will write to topic 1
+        Logger info = Logger.getLogger("info"); // writes "info" logs to file1.log
         info.info("Get mapping 1");
         List<MessageModel> list = new ArrayList<>();
         if(returnMessage(lastObj) == null){
@@ -82,13 +84,13 @@ public class ProducerController {
         }
 
         if(list.size() > 0)
-        kafkaTemplate.send("Topic1", list);  //test is topic name
+        kafkaTemplate.send("Topic1", list);  //sends the list of messages to the topic
 
-        return "yes";
+        return "Send to topic 1";
     }
 
 
-    public String producerToTopic2() throws FileNotFoundException, JsonProcessingException {
+    public String producerToTopic2() throws FileNotFoundException, JsonProcessingException { // what producer will write to topic 2
         Logger debug = Logger.getLogger("debug"); // writes debugs to file2.log
         debug.info("Get mapping 2");
         List<MessageModel> list = new ArrayList<>();
@@ -100,13 +102,14 @@ public class ProducerController {
 
         if(list.size() > 0)
             kafkaTemplate.send("Topic2", list);  //test is topic name
-        return "po";
+
+        return "Send to topic 2";
     }
 
 
-    @Scheduled(fixedRate = 10000)
+    @Scheduled(fixedRate = 1000)
     @GetMapping("/writeToTopics")
-    public void run() throws FileNotFoundException, JsonProcessingException {
+    public void run() throws FileNotFoundException, JsonProcessingException { // every 10 sec producer will write msg to topic
         producerToTopic1();
         producerToTopic2();
     }

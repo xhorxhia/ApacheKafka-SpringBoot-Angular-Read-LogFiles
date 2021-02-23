@@ -9,7 +9,8 @@ import java.util.List;
 import java.util.Scanner;
 
 /*
-Takes a file path and reads from the file
+Takes a file path and reads from the file and then writes in the topic.
+Will return a list with messages, and will add each time, only the last added logs.
  */
 
 public class LogHandler {
@@ -27,7 +28,7 @@ public class LogHandler {
         while(sc.hasNextLine()){
             String line = sc.nextLine(); // content for the model
 
-            if(row > lastRow) {
+            if(row > lastRow) {  // will write only the las added rows
                 list.add(new MessageModel(line, path, row));
             }
             row++;

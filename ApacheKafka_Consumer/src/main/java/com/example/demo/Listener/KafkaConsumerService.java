@@ -29,7 +29,7 @@ public class KafkaConsumerService {
      this.list = list;
      if(str.equals("TopicProve")){
          template.convertAndSend("/topic/group", list);  // con listen te klienti me ane te websocket
-         consumerController.insertToDB(this.list);
+         consumerController.insertToDB(this.list);  // shton listen me mesg ne db
      }
      }
 

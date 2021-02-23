@@ -1,5 +1,7 @@
 package com.example.demo.Model;
-
+/*
+The message that will be written in the topic.
+ */
 public class MessageModel {
      String content;
      String path;
